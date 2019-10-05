@@ -76,7 +76,7 @@ Citizen.CreateThread(function()
                 if timerCount <= 0 then
                     revivePed(ped)
 				else
-					TriggerEvent('chat:addMessage', { args = {"^*Wait ' .. timerCount .. ' more seconds before reviving."}})
+					TriggerEvent('chat:addMessage', { args = {'^*Wait ' .. timerCount .. ' more seconds before reviving.'}})
                 end	
             elseif IsControlJustReleased(0, 45) and GetLastInputMethod( 0 ) then
                 local coords = spawnPoints[math.random(1,#spawnPoints)]
