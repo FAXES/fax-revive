@@ -3,6 +3,8 @@
 --------------------------------
 
 local reviveWait = 90 -- Change the amount of time to wait before allowing revive (in seconds) (This feature is not in use yet!)
+local isDead = false
+local timerCount = reviveWait
 
 -- Turn off automatic respawn here instead of updating FiveM file.
 AddEventHandler('onClientMapStart', function()
@@ -16,14 +18,25 @@ end)
 function respawnPed(ped, coords)
 	SetEntityCoordsNoOffset(ped, coords.x, coords.y, coords.z, false, false, false, true)
 	NetworkResurrectLocalPlayer(coords.x, coords.y, coords.z, coords.heading, true, false) 
-
 	SetPlayerInvincible(ped, false) 
-
 	TriggerEvent('playerSpawned', coords.x, coords.y, coords.z, coords.heading)
 	ClearPedBloodDamage(ped)
 end
 
-local allowRespawn = false
+function revivePed(ped)
+	local playerPos = GetEntityCoords(ped, true)
+	isDead = false
+	timerCount = reviveWait
+	NetworkResurrectLocalPlayer(playerPos, true, true, false)
+	SetPlayerInvincible(ped, false)
+	ClearPedBloodDamage(ped)
+end
+
+function ShowInfoRevive(text)
+	SetNotificationTextEntry("STRING")
+	AddTextComponentSubstringPlayerName(text)
+	DrawNotification(true, true)
+end
 
 Citizen.CreateThread(function()
 	local respawnCount = 0
@@ -31,7 +44,7 @@ Citizen.CreateThread(function()
 	local playerIndex = NetworkGetPlayerIndex(-1) or 0
 	math.randomseed(playerIndex)
 
-	function createSpawnPoint(x1,x2,y1,y2,z,heading)
+	function createSpawnPoint(x1, x2, y1, y2, z, heading)
 		local xValue = math.random(x1,x2) + 0.0001
 		local yValue = math.random(y1,y2) + 0.0001
 
@@ -49,46 +62,39 @@ Citizen.CreateThread(function()
 	createSpawnPoint(335, 340, -1400, -1390, 34.0, 0) -- Central Los Santos
 	createSpawnPoint(1850, 1854, 3700, 3704, 35.0, 0) -- Sandy Shores
 	createSpawnPoint(-247, -245, 6328, 6332, 33.5, 0) -- Paleto
-	--createSpawnPoint(1152, 1156, -1525, -1521, 34.9, 0) -- St. Fiacre
 
 
     while true do
     Citizen.Wait(0)
 		ped = GetPlayerPed(-1)
-		if IsEntityDead(ped) then
-			-- ShowInfoRevive('~r~You Are Dead ~w~Please wait ~y~'.. tostring(reviveWait) ..' Seconds ~w~ before choosing an action')
-
+        if IsEntityDead(ped) then
+			isDead = true
             SetPlayerInvincible(ped, true)
             SetEntityHealth(ped, 1)
-
-			ShowInfoRevive('~y~ You Are Dead. ~w~Use ~p~E ~y~ to Revive or ~p~R ~y~to Respawn')
-
-			if ( IsControlJustReleased( 0, 38 ) or IsDisabledControlJustReleased( 0, 38 ) ) and GetLastInputMethod( 0 ) then 
-					revivePed(ped)
-					
-            elseif ( IsControlJustReleased( 0, 45 ) or IsDisabledControlJustReleased( 0, 45 ) ) and GetLastInputMethod( 0 ) then
+			ShowInfoRevive('You are dead. Use ~y~E ~w~to revive or ~y~R ~w~to respawn.')
+            if IsControlJustReleased(0, 38) and GetLastInputMethod(0) then
+                if timerCount <= 0 then
+                    revivePed(ped)
+				else
+					TriggerEvent('chat:addMessage', { args = {"^*Wait ' .. timerCount .. ' more seconds before reviving."}})
+                end	
+            elseif IsControlJustReleased(0, 45) and GetLastInputMethod( 0 ) then
                 local coords = spawnPoints[math.random(1,#spawnPoints)]
-
 				respawnPed(ped, coords)
-
-				allowRespawn = false
+				isDead = false
+				timerCount = reviveWait
 				respawnCount = respawnCount + 1
-				math.randomseed( playerIndex * respawnCount )
+				math.randomseed(playerIndex * respawnCount)
             end
         end
     end
 end)
 
-function revivePed(ped)
-	local playerPos = GetEntityCoords(ped, true)
-
-	NetworkResurrectLocalPlayer(playerPos, true, true, false)
-	SetPlayerInvincible(ped, false)
-	ClearPedBloodDamage(ped)
-end
-
-function ShowInfoRevive(text)
-	SetNotificationTextEntry("STRING")
-	AddTextComponentSubstringPlayerName(text)
-	DrawNotification(true, true)
-end
+Citizen.CreateThread(function()
+    while true do
+        if isDead then
+			timerCount = timerCount - 1
+        end
+        Citizen.Wait(1000)          
+    end
+end)
