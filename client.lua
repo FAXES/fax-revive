@@ -2,7 +2,7 @@
 --- RP Revive, Made by FAXES ---
 --------------------------------
 
-local reviveWait = 90 -- Change the amount of time to wait before allowing revive (in seconds) (This feature is not in use yet!)
+local reviveWait = 90 -- Change the amount of time to wait before allowing revive (in seconds)
 local isDead = false
 local timerCount = reviveWait
 
