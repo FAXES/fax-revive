@@ -2,13 +2,29 @@
 --- RP Revive, Made by FAXES ---
 --------------------------------
 
-local reviveWait = 90 -- Change the amount of time to wait before allowing revive (in seconds)
-local isDead = false
+--- Config ---
+
+local reviveWait = 90 -- Change the amount of time to wait before allowing revive (in seconds).
+local featureColor = "~y~" -- Game color used as the button key colors.
+
+--- Code ---
 local timerCount = reviveWait
+local isDead = false
+cHavePerms = false
+
+AddEventHandler('playerSpawned', function()
+    local src = source
+    TriggerServerEvent("RPRevive:CheckPermission", src)
+end)
+
+RegisterNetEvent("RPRevive:CheckPermission:Return")
+AddEventHandler("RPRevive:CheckPermission:Return", function(havePerms)
+	cHavePerms = havePerms
+end)
 
 -- Turn off automatic respawn here instead of updating FiveM file.
 AddEventHandler('onClientMapStart', function()
-	Citizen.Trace("RPRevive: Disabling le autospawn.")
+	Citizen.Trace("RPRevive: Disabling the autospawn.")
 	exports.spawnmanager:spawnPlayer() -- Ensure player spawns into server.
 	Citizen.Wait(2500)
 	exports.spawnmanager:setAutoSpawn(false)
@@ -73,10 +89,10 @@ Citizen.CreateThread(function()
             SetEntityHealth(ped, 1)
 			ShowInfoRevive('You are dead. Use ~y~E ~w~to revive or ~y~R ~w~to respawn.')
             if IsControlJustReleased(0, 38) and GetLastInputMethod(0) then
-                if timerCount <= 0 then
+                if timerCount <= 0 or cHavePerms then
                     revivePed(ped)
 				else
-					TriggerEvent('chat:addMessage', { args = {'^*Wait ' .. timerCount .. ' more seconds before reviving.'}})
+					TriggerEvent('chat:addMessage', {args = {'^*Wait ' .. timerCount .. ' more seconds before reviving.'}})
                 end	
             elseif IsControlJustReleased(0, 45) and GetLastInputMethod( 0 ) then
                 local coords = spawnPoints[math.random(1,#spawnPoints)]

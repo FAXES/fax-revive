@@ -1,34 +1,22 @@
-# **RP Revive By FAXES**
+### 📠 [Fax-revive][5mlink] 📠
 
-**About**
-RP Revive is a new style Revive script, inspired by DoJ's revive script this script uses keybindings instead of text chat commands. I plan to add more features very soon some including a timer and config.
+[![Discord](https://faxes.zone/i/9wkr3.png)](https://faxes.zone/discord)
 
-**In the Download**
-  >__resource.lua
-  client.lua
+----
 
-<hr>
+RP Revive is a new style Revive script, inspired by DoJ’s revive script this script uses keybindings instead of text chat commands. I plan to add more features very soon some including a timer and config.
 
-**Requirements**
-None. This is a standalone script.
+**Documentation:**
+- [FAXES Documentation Site](https://docs.faxes.zone/docs)
+- [FAXES ACE Permission Documentation](https://docs.faxes.zone/docs/aceperms)
+- [Getting Your Steam Hexadecimal](https://docs.faxes.zone/docs/getting-your-steam-hex)
 
-<hr>
+**Credits:**
+- FAXES
+- Astra 
 
-**Usage**
-**E** to revive
-**R** to respawn
+<br />
 
-**Installation**
-Place in your resources folder, just like any other resource.
+[![FiveM](https://faxes.zone/i/r5byi.png)][5mlink]
 
-
-**Credits**
-@TheStonedTurtle for some base work. @dibzer for being apart of my Official Community Testers 
-
-**Further [Support](http://faxes.zone/discord)**
-If you have any issues or comments please put them below.
-
-Original Resource sources
-
-http://faxes.zone/scripts/rprevive.html
-https://forum.fivem.net/t/rp-revive-fax-revive-0-9/130876
+[5mlink]: https://forum.cfx.re/t/130876
