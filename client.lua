@@ -87,7 +87,7 @@ Citizen.CreateThread(function()
 			isDead = true
             SetPlayerInvincible(ped, true)
             SetEntityHealth(ped, 1)
-			ShowInfoRevive('You are dead. Use ~y~E ~w~to revive or ~y~R ~w~to respawn.')
+            ShowInfoRevive('You are dead. Use' .. featureColor .. ' E ~w~to revive or'.. featureColor .. ' R ~w~to respawn.')
             if IsControlJustReleased(0, 38) and GetLastInputMethod(0) then
                 if timerCount <= 0 or cHavePerms then
                     revivePed(ped)
