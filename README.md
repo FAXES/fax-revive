@@ -1,10 +1,14 @@
+### This script requires Badger Discord API to work
+**Configuration is in `client.lua` AND `server.lua`**, config was also improved a bit
+
+
 ### 📠 [Fax-revive][5mlink] 📠
 
 [![Discord](https://faxes.zone/i/9wkr3.png)](https://faxes.zone/discord)
 
 ----
 
-RP Revive is a new style Revive script, inspired by DoJ’s revive script this script uses keybindings instead of text chat commands. I plan to add more features very soon some including a timer and config.
+RP Revive is a new style Revive script, inspired by DoJ’s revive script this script uses keybindings instead of text chat commands.
 
 **Documentation:**
 - [FAXES Documentation Site](https://docs.faxes.zone/docs)
