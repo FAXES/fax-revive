@@ -4,8 +4,8 @@
 
 --- Config ---
 
-local bypassRoles = { -- Discord Role ID(s) that can bypass the revive wait time. Leave this as it is if you don't want this function.
-    "DISCORD_ROLE_ID",
+local bypassRoles = { -- Discord Role ID(s) that can bypass the revive/respawn wait time. Leave this as it is if you don't want this function.
+    --"987194867597852724"
 }
 
 
@@ -21,17 +21,22 @@ AddEventHandler("RPRevive:CheckPermission", function()
     end
 
     if identifierDiscord then
-        exports['discordroles']:isRolePresent(src, bypassRoles, function(hasRole, roles)
-            if not roles then
+        local count = 0
+        local roleIDs = exports.Badger_Discord_API:GetDiscordRoles(src)
+        if not (roleIDs == false) then
+            for i = 1, #roleIDs do
+                if exports.Badger_Discord_API:CheckEqual(bypassRoles[i][1], roleIDs[j]) and i ~= 1 then
+                    TriggerClientEvent("RPRevive:CheckPermission:Return", src, true)
+                    count = count + 1
+                    break
+                end
+            end
+
+            if count == 0 then
                 TriggerClientEvent("RPRevive:CheckPermission:Return", src, false)
             end
-            if hasRole then
-                TriggerClientEvent("RPRevive:CheckPermission:Return", src, true)
-            else
-                TriggerClientEvent("RPRevive:CheckPermission:Return", src, false)
-            end
-        end)
-    else
-        TriggerClientEvent("RPRevive:CheckPermission:Return", src, false)
+        else
+            TriggerClientEvent("RPRevive:CheckPermission:Return", src, false)
+        end
     end
 end)
