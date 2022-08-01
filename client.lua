@@ -78,11 +78,10 @@ Citizen.CreateThread(function()
 	end
 
 	createSpawnPoint(1828.44, 3692.32, 34.22, 37.12) -- Back of Sandy Shores Hospital
-
-	ShowInfoRevive(chatColor .. 'You are dead. Use ' .. reviveColor .. 'E ' .. chatColor ..'to revive or ' .. respawnColor .. 'R ' .. chatColor .. 'to respawn.')
     while true do
     	Citizen.Wait(0)
 		ped = GetPlayerPed(-1)
+			ShowInfoRevive(chatColor .. 'You are dead. Use ' .. reviveColor .. 'E ' .. chatColor ..'to revive or ' .. respawnColor .. 'R ' .. chatColor .. 'to respawn.')
         if IsEntityDead(ped) then
 			isDead = true
             SetPlayerInvincible(ped, true)
