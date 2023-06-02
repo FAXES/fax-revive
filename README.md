@@ -1,6 +1,6 @@
 > **IMPORTANT NOTICE:**
 > The free version of DiscordWhitelist is no longer supported or maintained. See the new version here:
-> https://weblutions.com/store/5m-discordwhitelist
+> https://weblutions.com/store/faxrevive
 
 <a href="https://discord.gg/faxes" target="_blank">
       <picture>
