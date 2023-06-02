@@ -1,10 +1,17 @@
-### This script requires Badger Discord API to work
-**Configuration is in `client.lua` AND `server.lua`**, config was also improved a bit
+> **IMPORTANT NOTICE:**
+> The free version of DiscordWhitelist is no longer supported or maintained. See the new version here:
+> https://weblutions.com/store/5m-discordwhitelist
+
+<a href="https://discord.gg/faxes" target="_blank">
+      <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="https://api.weblutions.com/discord/invite/faxes">
+            <source media="(prefers-color-scheme: light)" srcset="https://api.weblutions.com/discord/invite/faxes/light">
+            <img alt="Discord Invite" src="https://api.weblutions.com/discord/invite/faxes">
+      </picture>
+</a>
 
 
 ### 📠 [Fax-revive][5mlink] 📠
-
-[![Discord](https://faxes.zone/i/9wkr3.png)](https://faxes.zone/discord)
 
 ----
 
