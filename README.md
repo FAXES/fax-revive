@@ -1,6 +1,6 @@
 > ## **IMPORTANT NOTICE:**
 > The free version of Fax-Revive is no longer supported or maintained. See the new version here:
-> https://weblutions.com/store/faxrevive
+> [weblutions.com/store/faxrevive](https://weblutions.com/store/5m-faxrevive)
 
 ![discord](https://api.weblutions.com/discord/invite/faxes)
 
